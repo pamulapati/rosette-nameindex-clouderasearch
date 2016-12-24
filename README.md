@@ -12,11 +12,11 @@ Install Rosette on all the Solr nodes of the CDH cluster. To do this, you’ll n
 
 You must include a Java property setting that points to the root of a Rosette SDK,. You can achieve this in Cloudera Manager, by searching “Java Configuration Options for Solr Server”  and appending the existing value with  -Dbt.root=<BT_ROOT> (e.g. -Dbt.root=/usr/bt/rlp). Click “Save Changes” and restart your Solr services.
 
-<screenshot>
+![Alt text](/screenshots/cm_setting.png?raw=true "Optional Title")
 
 You can use the project made available in this git to get you started  by pulling the namesearch folder to /root/namesearch on a node in the cluster
 
-<screenshot>
+![Alt text](/screenshots/sdk_structure.png?raw=true "Optional Title")
 export PROJECT_HOME=/root/namesearch
 
 
@@ -46,10 +46,10 @@ vi conf/solrconfig.xml and verify that the [[BT_ROOT]] matches to where you unzi
 
 <H2>Running the tests</H2>
 
-Create namesearch insteance directory in SolrCloud
+Create namesearch insteance directory in SolrCloud <Br>
 ```sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr instancedir --create namesearch $PROJECT_HOME```
 
-Create namesearch collection in SolrCloud
+Create namesearch collection in SolrCloud <Br>
 ```sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr collection --create namesearch -s 3 -r 1```
 
 You have name search application ready.
@@ -58,5 +58,6 @@ You have name search application ready.
 
 http://hostname:8983/solr/namesearch_shard3_replica1/select?q=primaryName%3Abob&wt=json&indent=true
 
+![Alt text](/screenshots/results.png?raw=true "Optional Title")
 
 
