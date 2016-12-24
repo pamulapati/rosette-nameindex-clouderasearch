@@ -4,7 +4,7 @@
 
 This document describes how to integrate and test Basis Technology’s Rosette®’s name indexing and matching technology  with Cloudera Search.
 <H2>Compatibility</H2>
-To get started, you will need a CDH cluster with Cloudera Search/Solr services running on Java SDK 1.8 or later. 
+To get started, you will need a [CDH cluster with Cloudera Search/Solr] (https://www.cloudera.com/documentation/enterprise/latest/topics/installation_installation.html) services running on [Java SDK 1.8 or later](https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_jdk_installation.html). 
 
 <H2>Installation</H2>
 
