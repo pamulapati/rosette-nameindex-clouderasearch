@@ -1,6 +1,14 @@
+
+<H1>Testing Basis Technology Rosette Software with Cloudera Search</H1>
+<H2>Introduction</H2>
+
+This document describes how to integrate and test Basis Technology’s Rosette®’s name indexing and matching technology  with Cloudera Search.
+<H2>Compatibility</H2>
 To get started, you will need a CDH cluster with Cloudera Search/Solr services running on Java SDK 1.8 or later. 
 
-Then, install Rosette on all the Solr nodes of the CDH cluster. To do this, you’ll need to unzip the SDK and Documentation files to the same directory (which we will call BT_ROOT) and then copy the license file to the BT_ROOT/rlp/rlp/licenses subdirectory.
+<H2>Installation</H2>
+
+Install Rosette on all the Solr nodes of the CDH cluster. To do this, you’ll need to unzip the SDK and Documentation files to the same directory (which we will call BT_ROOT) and then copy the license file to the BT_ROOT/rlp/rlp/licenses subdirectory.
 
 You must include a Java property setting that points to the root of a Rosette SDK,. You can achieve this in Cloudera Manager, by searching “Java Configuration Options for Solr Server”  and appending the existing value with  -Dbt.root=<BT_ROOT> (e.g. -Dbt.root=/usr/bt/rlp). Click “Save Changes” and restart your Solr services.
 
@@ -20,7 +28,7 @@ vi conf/schema.xml and observe
 
 
 vi conf/solrconfig.xml and verify that the [[BT_ROOT]] matches to where you unzipped Rosette   SDK
-
+```
 <lib path="[[BT_ROOT]]/lib/jvm/bt-adm-model-2.1.2.jar"/>
 <lib path="[[BT_ROOT]]/lib/jvm/btcommon-api-36.0.2.jar"/>
 <lib path="[[BT_ROOT]]/lib/jvm/btcommon-api-jackson-36.0.2.jar"/>
@@ -33,18 +41,22 @@ vi conf/solrconfig.xml and verify that the [[BT_ROOT]] matches to where you unzi
 <lib path="[[BT_ROOT]]/lib/jvm/slf4j-api-1.6.4.jar"/>
 <lib path="[[BT_ROOT]]/lib/jvm/slf4j-jdk14-1.6.4.jar"/>
 <lib path="[[BT_ROOT]]/lib/jvm/slf4j-log4j12-1.6.4.jar"/>
+```
 
 
-
+<H2>Running the tests</H2>
 
 Create namesearch insteance directory in SolrCloud
-sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr instancedir --create namesearch $PROJECT_HOME
+```sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr instancedir --create namesearch $PROJECT_HOME```
 
 Create namesearch collection in SolrCloud
-sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr collection --create namesearch -s 3 -r 1
+```sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr collection --create namesearch -s 3 -r 1```
 
 You have name search application ready.
 
+<H2>Viewing Test Results</H2>
+
+http://hostname:8983/solr/namesearch_shard3_replica1/select?q=primaryName%3Abob&wt=json&indent=true
 
 
 
