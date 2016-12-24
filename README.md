@@ -54,8 +54,16 @@ Create namesearch collection in SolrCloud <Br>
 
 You have name search application ready.
 
+Index a single document with following values into your Solr cluster: <br/>
+
+"primaryName": "Robert Smith",<br/>
+"dob": "1995-12-31T23:59:59Z",<br/>
+"profile": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa." <br/>
+
+
 <H2>Viewing Test Results</H2>
 
+Query for primaryName:bob and observer that the Rosette®’s name indexing and matching technology found Robert Smith as a valid match. <br/>
 http://hostname:8983/solr/namesearch_shard3_replica1/select?q=primaryName%3Abob&wt=json&indent=true
 
 ![Alt text](/screenshots/results.png?raw=true "Optional Title")
