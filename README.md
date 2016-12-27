@@ -70,8 +70,10 @@ Index a single document with following values into your Solr cluster: <br/> Noti
 
 <H2>Viewing Test Results</H2>
 
-Query for primaryName:bob and observer that the Rosette®’s name indexing and matching technology found Robert Smith as a valid match. <br/> Notice that the Primary Name used in search is "bob", as you can see in the results below Cloudera Search  found the document with "Robert Smith" using Basis Technology’s Rosette® to perform fuzzy name search.
+Query for primaryName:bob <br/>
 http://hostname:8983/solr/namesearch_shard3_replica1/select?q=primaryName%3Abob&wt=json&indent=true
+<br/>
+ Notice that the Primary Name used in search is "bob", As you can see in the results below Cloudera Search  found the document with "Robert Smith" using Basis Technology’s Rosette® to perform fuzzy name indexing and matching plugin. 
 
 ![Alt text](/screenshots/results.png?raw=true "Optional Title")
 
