@@ -10,7 +10,7 @@ To get started, you will need a [CDH cluster with Cloudera Search/Solr] (https:/
 
 Install Rosette on all the Solr nodes of the CDH cluster. To do this, you’ll need to unzip the SDK and Documentation files to the same directory (which we will call BT_ROOT) and then copy the license file to the BT_ROOT/rlp/rlp/licenses subdirectory.
 
-You must include a Java property setting that points to the root of a Rosette SDK,. You can achieve this in Cloudera Manager, by searching “Java Configuration Options for Solr Server”  and appending the existing value with  -Dbt.root=<BT_ROOT> (e.g. -Dbt.root=/usr/bt/rlp). Click “Save Changes” and restart your Solr services.
+You must include a Java property setting that points to the root of a Rosette SDK. You can achieve this in Cloudera Manager, by searching “Java Configuration Options for Solr Server”  and appending the existing value with  -Dbt.root=<BT_ROOT> (e.g. -Dbt.root=/usr/bt/rlp). Click “Save Changes” and restart your Solr services.
 
 ![Alt text](/screenshots/cm_setting.png?raw=true "Optional Title")
 
@@ -47,14 +47,21 @@ vi conf/solrconfig.xml and verify that the [[BT_ROOT]] matches to where you unzi
 <H2>Running the tests</H2>
 
 Create namesearch insteance directory in SolrCloud <Br>
+```sudo solrctl --zk [ZK ensemble] instancedir --create namesearch $PROJECT_HOME```
+Example:
 ```sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr instancedir --create namesearch $PROJECT_HOME```
 
+
+
 Create namesearch collection in SolrCloud <Br>
+```sudo solrctl --zk [ZK ensemble] collection --create namesearch -s 3 -r 1```
+
+Example
 ```sudo solrctl --zk solrtest-1.vpc.cloudera.com:2181,solrtest-2.vpc.cloudera.com:2181,solrtest-3.vpc.cloudera.com:2181/solr collection --create namesearch -s 3 -r 1```
 
 You have name search application ready.
 
-Index a single document with following values into your Solr cluster: <br/>
+Index a single document with following values into your Solr cluster: <br/> Notice that the Primary Name of in the document is "Robert Smith".
 
 "primaryName": "Robert Smith",<br/>
 "dob": "1995-12-31T23:59:59Z",<br/>
@@ -63,7 +70,7 @@ Index a single document with following values into your Solr cluster: <br/>
 
 <H2>Viewing Test Results</H2>
 
-Query for primaryName:bob and observer that the Rosette®’s name indexing and matching technology found Robert Smith as a valid match. <br/>
+Query for primaryName:bob and observer that the Rosette®’s name indexing and matching technology found Robert Smith as a valid match. <br/> Notice that the Primary Name used in search is "bob", as you can see in the results below Cloudera Search  found the document with "Robert Smith" using Basis Technology’s Rosette® to perform fuzzy name search.
 http://hostname:8983/solr/namesearch_shard3_replica1/select?q=primaryName%3Abob&wt=json&indent=true
 
 ![Alt text](/screenshots/results.png?raw=true "Optional Title")
