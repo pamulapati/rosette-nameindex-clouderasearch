@@ -61,7 +61,7 @@ Example
 
 You have name search application ready.
 
-Index a single document with following values into your Solr cluster: <br/> Notice that the Primary Name of in the document is "Robert Smith".
+Index a single document with following values into your Solr cluster: <br/> Notice that the Primary Name in this test  document is "Robert Smith".
 
 "primaryName": "Robert Smith",<br/>
 "dob": "1995-12-31T23:59:59Z",<br/>
